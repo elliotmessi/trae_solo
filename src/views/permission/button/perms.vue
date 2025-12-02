@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { hasPerms } from "@/utils/auth";
+import { hasPerms } from "@/utils/auth_old";
 import { useUserStoreHook } from "@/store/modules/user";
 
 const { permissions } = useUserStoreHook();
 
 defineOptions({
-  name: "PermissionButtonLogin"
+  name: "PermissionButtonLogin",
 });
 </script>
 
@@ -35,7 +35,7 @@ defineOptions({
           :value="[
             'permission:btn:add',
             'permission:btn:edit',
-            'permission:btn:delete'
+            'permission:btn:delete',
           ]"
         >
           <el-button plain type="danger">
@@ -66,7 +66,7 @@ defineOptions({
             hasPerms([
               'permission:btn:add',
               'permission:btn:edit',
-              'permission:btn:delete'
+              'permission:btn:delete',
             ])
           "
           plain
@@ -95,7 +95,7 @@ defineOptions({
           v-perms="[
             'permission:btn:add',
             'permission:btn:edit',
-            'permission:btn:delete'
+            'permission:btn:delete',
           ]"
           plain
           type="danger"

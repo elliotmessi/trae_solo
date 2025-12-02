@@ -1,4 +1,4 @@
-import { hasPerms } from "@/utils/auth";
+import { hasPerms } from "@/utils/auth_old";
 import type { Directive, DirectiveBinding } from "vue";
 
 export const perms: Directive = {

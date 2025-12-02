@@ -1,13 +1,13 @@
 import { defineComponent, Fragment } from "vue";
-import { hasPerms } from "@/utils/auth";
+import { hasPerms } from "@/utils/auth_old";
 
 export default defineComponent({
   name: "Perms",
   props: {
     value: {
       type: undefined,
-      default: []
-    }
+      default: [],
+    },
   },
   setup(props, { slots }) {
     return () => {
@@ -16,5 +16,5 @@ export default defineComponent({
         <Fragment>{slots.default?.()}</Fragment>
       ) : null;
     };
-  }
+  },
 });

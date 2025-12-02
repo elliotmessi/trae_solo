@@ -32,6 +32,9 @@ importers:
       axios:
         specifier: ^1.13.2
         version: 1.13.2
+      crypto-js:
+        specifier: ^4.2.0
+        version: 4.2.0
       dayjs:
         specifier: ^1.11.19
         version: 1.11.19
@@ -87,6 +90,9 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0(vue@3.5.25(typescript@5.9.3))
     devDependencies:
+      '@alova/adapter-axios':
+        specifier: ^2.0.16
+        version: 2.0.16(alova@3.4.0)(axios@1.13.2)
       '@commitlint/cli':
         specifier: ^20.1.0
         version: 20.1.0(@types/node@20.19.25)(typescript@5.9.3)
@@ -108,6 +114,9 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.1.17
         version: 4.1.17(vite@7.2.6(@types/node@20.19.25)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.94.2)(yaml@2.8.1))
+      '@types/crypto-js':
+        specifier: ^4.2.2
+        version: 4.2.2
       '@types/js-cookie':
         specifier: ^3.0.6
         version: 3.0.6
@@ -239,6 +248,12 @@ importers:
         version: 3.1.5(typescript@5.9.3)
 
 packages:
+
+  '@alova/adapter-axios@2.0.16':
+    resolution: {integrity: sha512-O9iskfllA8Yd5QV7w/c2aBduf1ocpD5goXp3aJbBXovZanKbsgMyvuFycXmTeqPyLdjURo5fYicEmWHwURpkbQ==}
+    peerDependencies:
+      alova: ^3.0.20
+      axios: '>=0.4.0'
 
   '@alova/shared@1.3.1':
     resolution: {integrity: sha512-ijSOaFLUFcVzMKSY3avoEE5C03/p9atjMDPBwvNkwnzaCrhv6/m4A121NdadF8YlHCRuifyYfz90IyEdMXTsJg==}
@@ -1321,6 +1336,9 @@ packages:
   '@types/conventional-commits-parser@5.0.2':
     resolution: {integrity: sha512-BgT2szDXnVypgpNxOK8aL5SGjUdaQbC++WZNjF1Qge3Og2+zhHj+RWhmehLhYyvQwqAmvezruVfOf8+3m74W+g==}
 
+  '@types/crypto-js@4.2.2':
+    resolution: {integrity: sha512-sDOLlVbHhXpAUAL0YHDUUwDZf3iN4Bwi4W6a0W0b+QcAezUbRtH4FVb+9J4h+XFPW7l/gQ9F8qC7P+Ec4k8QVQ==}
+
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
 
@@ -1754,6 +1772,9 @@ packages:
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
     engines: {node: '>= 8'}
+
+  crypto-js@4.2.0:
+    resolution: {integrity: sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==}
 
   css-declaration-sorter@7.3.0:
     resolution: {integrity: sha512-LQF6N/3vkAMYF4xoHLJfG718HRJh34Z8BnNhd6bosOMIVjMlhuZK5++oZa3uYAgrI5+7x2o27gUqTR2U/KjUOQ==}
@@ -3693,6 +3714,12 @@ packages:
 
 snapshots:
 
+  '@alova/adapter-axios@2.0.16(alova@3.4.0)(axios@1.13.2)':
+    dependencies:
+      '@alova/shared': 1.3.1
+      alova: 3.4.0
+      axios: 1.13.2
+
   '@alova/shared@1.3.1': {}
 
   '@antfu/install-pkg@1.1.0':
@@ -4617,6 +4644,8 @@ snapshots:
     dependencies:
       '@types/node': 20.19.25
 
+  '@types/crypto-js@4.2.2': {}
+
   '@types/estree@1.0.8': {}
 
   '@types/js-cookie@3.0.6': {}
@@ -5142,6 +5171,8 @@ snapshots:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
+
+  crypto-js@4.2.0: {}
 
   css-declaration-sorter@7.3.0(postcss@8.5.6):
     dependencies:

@@ -14,7 +14,7 @@ import {
   refreshTokenApi
 } from "@/api/user";
 import { useMultiTagsStoreHook } from "./multiTags";
-import { type DataInfo, setToken, removeToken, userKey } from "@/utils/auth";
+import { type DataInfo, setToken, removeToken, userKey } from "@/utils/auth_old";
 
 export const useUserStore = defineStore("pure-user", {
   state: (): userType => ({

@@ -1,4 +1,4 @@
-import { removeToken, setToken, type DataInfo } from "./auth";
+import { removeToken, setToken, type DataInfo } from "./auth_old";
 import { subBefore, getQueryMap } from "@pureadmin/utils";
 
 /**
