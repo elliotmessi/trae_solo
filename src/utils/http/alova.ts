@@ -11,7 +11,10 @@ const AxiosInstance = Axios.create({
   paramsSerializer: params => stringify(params, { arrayFormat: 'repeat' }),
 })
 
-const { onAuthRequired, onResponseRefreshToken } = createServerTokenAuthentication<typeof VueHook, typeof axiosRequestAdapter>({
+const { onAuthRequired, onResponseRefreshToken } = createServerTokenAuthentication<
+  typeof VueHook,
+  typeof axiosRequestAdapter
+>({
   refreshTokenOnError: {
     // 当服务端token过期
     isExpired(response) {
@@ -35,7 +38,8 @@ const { onAuthRequired, onResponseRefreshToken } = createServerTokenAuthenticati
   },
   assignToken: method => {
     const token = getToken()
-    method.meta?.authRole !== 'refreshToken' && (method.config.headers.Authorization = formatToken(token))
+    method.meta?.authRole !== 'refreshToken' &&
+      (method.config.headers.Authorization = formatToken(token))
   },
 })
 

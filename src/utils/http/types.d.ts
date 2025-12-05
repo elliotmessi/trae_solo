@@ -4,7 +4,10 @@ export type resultType = {
   accessToken?: string
 }
 
-export type RequestMethods = Extract<Method, 'get' | 'post' | 'put' | 'delete' | 'patch' | 'option' | 'head'>
+export type RequestMethods = Extract<
+  Method,
+  'get' | 'post' | 'put' | 'delete' | 'patch' | 'option' | 'head'
+>
 
 export interface SolutionHttpError extends AxiosError {
   isCancelRequest?: boolean

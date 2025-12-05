@@ -97,6 +97,8 @@ export const hasPerms = (value: string | Array<string>): boolean => {
   const { permissions } = useUserStoreHook()
   if (!permissions) return false
   if (permissions.length === 1 && permissions[0] === allPerms) return true
-  const isAuths = isString(value) ? permissions.includes(value) : isIncludeAllChildren(value, permissions)
+  const isAuths = isString(value)
+    ? permissions.includes(value)
+    : isIncludeAllChildren(value, permissions)
   return isAuths ? true : false
 }

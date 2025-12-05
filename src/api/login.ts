@@ -47,7 +47,11 @@ export const getVerifyCodeImage = (randomStr: string) => {
 
 /** 获取注册验证码 */
 export const getVerifyCode = (username?: string) => {
-  return http.post('/service/supplier/account/send-code', { username }, { meta: { authRole: null } })
+  return http.post(
+    '/service/supplier/account/send-code',
+    { username },
+    { meta: { authRole: null } },
+  )
 }
 
 /** 获取邮箱验证码,找回密码/修改邮箱 */
@@ -59,7 +63,8 @@ export const getAccountVerifyCode = (account: string) => {
 // export const bindSoicalAccountAPI = (code: string, type: string) => http.post(`/account/bind/${type}?code=${code}`)
 
 // 检测账号是否存在
-export const accountExisted = (username: string) => http.post('/service/supplier/account/exist', { username }, { meta: { authRole: null } })
+export const accountExisted = (username: string) =>
+  http.post('/service/supplier/account/exist', { username }, { meta: { authRole: null } })
 
 export const refreshToken = (refresh_token: string) => {
   const grant_type = 'refresh_token'
