@@ -1,42 +1,22 @@
 // 根据角色动态生成路由
 import { defineFakeRoute } from "vite-plugin-fake-server/client";
+import { success } from "./utils";
 
 export default defineFakeRoute([
   {
-    url: "/login",
+    url: "/api/auth/oauth2/token",
     method: "post",
-    response: ({ body }) => {
-      if (body.username === "admin") {
-        return {
-          success: true,
-          data: {
-            avatar: "https://avatars.githubusercontent.com/u/44761321",
-            username: "admin",
-            nickname: "小铭",
-            // 一个用户可能有多个角色
-            roles: ["admin"],
-            // 按钮级别权限
-            permissions: ["*:*:*"],
-            accessToken: "eyJhbGciOiJIUzUxMiJ9.admin",
-            refreshToken: "eyJhbGciOiJIUzUxMiJ9.adminRefresh",
-            expires: "2030/10/30 00:00:00"
-          }
-        };
-      } else {
-        return {
-          success: true,
-          data: {
-            avatar: "https://avatars.githubusercontent.com/u/52823142",
-            username: "common",
-            nickname: "小林",
-            roles: ["common"],
-            permissions: ["permission:btn:add", "permission:btn:edit"],
-            accessToken: "eyJhbGciOiJIUzUxMiJ9.common",
-            refreshToken: "eyJhbGciOiJIUzUxMiJ9.commonRefresh",
-            expires: "2030/10/30 00:00:00"
-          }
-        };
-      }
-    }
+    response: () => success({
+      token: "fake-token",
+      userInfo: {
+        id: "1",
+        username: "admin",
+        nickName: "admin",
+        avatar: "https://i.gtimg.cn/club/item/face/img/2/15922_100.gif",
+        roles: ["admin", "common"],
+        auths: ["permission:btn:add", "permission:btn:edit", "permission:btn:delete"]
+      },
+      expires: 7 * 24 * 60 * 60 * 1000
+    })
   }
 ]);

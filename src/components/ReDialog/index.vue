@@ -2,10 +2,12 @@
 import {
   type EventType,
   type ButtonProps,
-  type DialogOptions,
+  type DialogOptions
+} from "./index";
+import {
   closeDialog,
   dialogStore
-} from "./index";
+} from "./utils";
 import { ref, computed } from "vue";
 import { isFunction } from "@pureadmin/utils";
 import Fullscreen from "~icons/ri/fullscreen-fill";

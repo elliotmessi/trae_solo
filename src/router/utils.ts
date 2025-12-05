@@ -155,9 +155,9 @@ function addPathMatch() {
 }
 
 /** 处理动态路由（后端返回的路由） */
-function handleAsyncRoutes(routeList) {
-  if (routeList.length === 0) {
-    usePermissionStoreHook().handleWholeMenus(routeList);
+function handleAsyncRoutes(routeList: Array<RouteRecordRaw>) {
+  if (!routeList || routeList.length === 0) {
+    usePermissionStoreHook().handleWholeMenus([]);
   } else {
     formatFlatteningRoutes(addAsyncRoutes(routeList)).map(
       (v: RouteRecordRaw) => {
@@ -209,17 +209,21 @@ function initRouter() {
       });
     } else {
       return new Promise(resolve => {
-        getAsyncRoutes().then(({ data }) => {
-          handleAsyncRoutes(cloneDeep(data));
-          storageLocal().setItem(key, data);
+        getAsyncRoutes().then((data) => {
+          console.log('data:', data)
+          const safeData = Array.isArray(data) ? data : [];
+          handleAsyncRoutes(cloneDeep(safeData));
+          storageLocal().setItem(key, safeData);
           resolve(router);
         });
       });
     }
   } else {
     return new Promise(resolve => {
-      getAsyncRoutes().then(({ data }) => {
-        handleAsyncRoutes(cloneDeep(data));
+      getAsyncRoutes().then((data) => {
+        console.log('async routes data:', data)
+        const safeData = Array.isArray(data) ? data : [];
+        handleAsyncRoutes(cloneDeep(safeData));
         resolve(router);
       });
     });
@@ -307,7 +311,7 @@ function handleAliveRoute({ name }: ToRouteType, mode?: string) {
 
 /** 过滤后端传来的动态路由 重新生成规范路由 */
 function addAsyncRoutes(arrRoutes: Array<RouteRecordRaw>) {
-  if (!arrRoutes || !arrRoutes.length) return;
+  if (!arrRoutes || !Array.isArray(arrRoutes) || !arrRoutes.length) return [];
   const modulesRoutesKeys = Object.keys(modulesRoutes);
   arrRoutes.forEach((v: RouteRecordRaw) => {
     // 将backstage属性加入meta，标识此路由为后端返回路由

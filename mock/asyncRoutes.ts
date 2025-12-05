@@ -1,5 +1,6 @@
 // 模拟后端动态生成路由
 import { defineFakeRoute } from "vite-plugin-fake-server/client";
+import { success } from "./utils";
 
 /**
  * roles：页面级别权限，这里模拟二种 "admin"、"common"
@@ -11,6 +12,7 @@ const permissionRouter = {
   meta: {
     title: "权限管理",
     icon: "ep:lollipop",
+    showLink: true,
     rank: 10
   },
   children: [
@@ -57,13 +59,10 @@ const permissionRouter = {
 
 export default defineFakeRoute([
   {
-    url: "/get-async-routes",
+    url: "/api/get-async-routes",
     method: "get",
     response: () => {
-      return {
-        success: true,
-        data: [permissionRouter]
-      };
+      return success([permissionRouter]);
     }
   }
 ]);
