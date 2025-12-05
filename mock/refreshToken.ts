@@ -15,11 +15,10 @@ export default defineFakeRoute([
           nickName: "admin",
           avatar: "https://i.gtimg.cn/club/item/face/img/2/15922_100.gif",
           roles: ["admin", "common"],
-          auths: ["permission:btn:add", "permission:btn:edit", "permission:btn:delete"]
+          auths: ["permission:btn:add", "permission:btn:edit", "permission:btn:delete"],
         },
-        expires: 7 * 24 * 60 * 60 * 1000
-      }
-      );
-    }
-  }
+        expires: 7 * 24 * 60 * 60 * 1000,
+      });
+    },
+  },
 ]);

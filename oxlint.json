@@ -80,13 +80,5 @@
     "trailingComma": "all",
     "semi": false,
     "printWidth": 160
-  },
-  "formatWithTabs": false,
-  "tabWidth": 2,
-  "lineWidth": 160,
-  "singleQuote": true,
-  "trailingComma": "all",
-  "arrowParens": "avoid",
-  "bracketSpacing": true,
-  "semi": false
+  }
 }

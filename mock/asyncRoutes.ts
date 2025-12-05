@@ -13,7 +13,7 @@ const permissionRouter = {
     title: "权限管理",
     icon: "ep:lollipop",
     showLink: true,
-    rank: 10
+    rank: 10,
   },
   children: [
     {
@@ -21,14 +21,14 @@ const permissionRouter = {
       name: "PermissionPage",
       meta: {
         title: "页面权限",
-        roles: ["admin", "common"]
-      }
+        roles: ["admin", "common"],
+      },
     },
     {
       path: "/permission/button",
       meta: {
         title: "按钮权限",
-        roles: ["admin", "common"]
+        roles: ["admin", "common"],
       },
       children: [
         {
@@ -37,24 +37,20 @@ const permissionRouter = {
           name: "PermissionButtonRouter",
           meta: {
             title: "路由返回按钮权限",
-            auths: [
-              "permission:btn:add",
-              "permission:btn:edit",
-              "permission:btn:delete"
-            ]
-          }
+            auths: ["permission:btn:add", "permission:btn:edit", "permission:btn:delete"],
+          },
         },
         {
           path: "/permission/button/login",
           component: "permission/button/perms",
           name: "PermissionButtonLogin",
           meta: {
-            title: "登录接口返回按钮权限"
-          }
-        }
-      ]
-    }
-  ]
+            title: "登录接口返回按钮权限",
+          },
+        },
+      ],
+    },
+  ],
 };
 
 export default defineFakeRoute([
@@ -63,6 +59,6 @@ export default defineFakeRoute([
     method: "get",
     response: () => {
       return success([permissionRouter]);
-    }
-  }
+    },
+  },
 ]);
