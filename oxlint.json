@@ -1,7 +1,7 @@
 {
   "rules": {
     "no-unused-vars": "error",
-    "no-undef": "off",
+    "no-undef": "error",
     "no-console": "off",
     "no-debugger": "warn",
     "no-explicit-any": "off",
