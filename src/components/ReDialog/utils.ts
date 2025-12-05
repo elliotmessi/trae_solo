@@ -19,7 +19,7 @@ export const addDialog = (options: DialogOptions) => {
 /** 关闭弹框 */
 export const closeDialog = (options: DialogOptions, index: number, args?: any) => {
   dialogStore.value[index].visible = false
-  options.closeCallBack && options.closeCallBack({ options, index, args })
+  options?.closeCallBack({ options, index, args })
 
   const closeDelay = options?.closeDelay ?? 200
   useTimeoutFn(() => {
