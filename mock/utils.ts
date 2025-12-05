@@ -3,5 +3,5 @@ export const success = <T extends any = any>(data: T) => {
     success: true,
     code: 0,
     data,
-  };
-};
+  }
+}

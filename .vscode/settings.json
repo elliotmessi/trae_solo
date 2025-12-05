@@ -3,7 +3,13 @@
   "editor.formatOnType": true,
   "editor.formatOnSave": true,
   "[vue]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "editor.tabSize": 2,
   "editor.formatOnPaste": true,
@@ -23,7 +29,7 @@
     "editor.snippetSuggestions": "top"
   },
   "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
@@ -41,4 +47,5 @@
     "v-ripple"
   ],
   "vscodeCustomCodeColor.highlightValueColor": "#b392f0",
+  "editor.defaultFormatter": "oxc.oxc-vscode",
 }
