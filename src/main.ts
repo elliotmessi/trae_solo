@@ -7,7 +7,7 @@ import { MotionPlugin } from '@vueuse/motion'
 import { createApp, type Directive } from 'vue'
 import { injectResponsiveStorage } from '@/utils/responsive'
 
-import Table from '@pureadmin/table'
+// import Table from '@pureadmin/table'
 // import PureDescriptions from "@pureadmin/descriptions";
 
 // 引入重置样式
@@ -52,7 +52,8 @@ getPlatformConfig(app).then(async config => {
   app.use(router)
   await router.isReady()
   injectResponsiveStorage(app, config)
-  app.use(MotionPlugin).use(Table)
+  app.use(MotionPlugin)
+  // .use(Table)
   // .use(PureDescriptions)
   // .use(useEcharts);
   app.mount('#app')
