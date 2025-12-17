@@ -32,8 +32,6 @@ const trigger = (target: Record<string, any>, key: string | symbol) => {
 const react = (data: Record<string, any>) => {
   return new Proxy(data, {
     get(target, key, receiver) {
-      console.log('get:', key)
-
       const value = Reflect.get(target, key, receiver)
       track(target, key)
       if (typeof value === 'object' && value !== null) {
@@ -42,7 +40,6 @@ const react = (data: Record<string, any>) => {
       return value
     },
     set(target, key, value, receiver) {
-      console.log('set:', key, value)
       const oldValue = Reflect.get(target, key, receiver)
       const result = Reflect.set(target, key, value, receiver)
       if (oldValue !== value) {
