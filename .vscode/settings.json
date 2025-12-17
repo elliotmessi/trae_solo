@@ -3,13 +3,13 @@
   "editor.formatOnType": true,
   "editor.formatOnSave": true,
   "[vue]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
+    "editor.defaultFormatter": "Vue.volar"
   },
   "[javascript]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "editor.tabSize": 2,
   "editor.formatOnPaste": true,

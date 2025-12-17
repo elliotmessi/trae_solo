@@ -21,5 +21,14 @@ export default {
         showLink: VITE_HIDE_HOME === 'true' ? false : true,
       },
     },
+    {
+      path: '/test-proxy',
+      name: 'TestProxy',
+      component: () => import('@/views/proxy/index.vue'),
+      meta: {
+        title: '测试代理',
+        showLink: true,
+      },
+    },
   ],
 } satisfies RouteConfigsTable
