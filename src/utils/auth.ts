@@ -40,8 +40,7 @@ export function getRefreshToken(): string {
  * 将`avatar`、`username`、`nickname`、`roles`、`permissions`、`refreshToken`、`expires`这七条信息放在key值为`user-info`的localStorage里（利用`multipleTabsKey`当浏览器完全关闭后自动销毁）
  */
 export function setToken(data: LoginResponse) {
-  // let expires = 0
-  const { access_token, refresh_token, user_id, username } = data
+  const { access_token, refresh_token, userInfo } = data
   const { isRemembered } = useUserStoreHook()
 
   const Storage = isRemembered ? local : cookie
@@ -51,17 +50,20 @@ export function setToken(data: LoginResponse) {
 
   session.set(multipleTabsKey, 'true')
 
-  function setUserKey({ user_id }) {
-    // useUserStoreHook().SET_ID(user_id)
+  function setUserKey({ id, avatar, username, nickname, roles, permissions }: UserInfo) {
     local.set(userKey, {
-      user_id,
+      id,
+      refresh_token,
+      avatar,
+      username,
+      nickname,
+      roles,
+      permissions,
     })
   }
 
-  if (username) {
-    setUserKey({
-      user_id,
-    })
+  if (userInfo.username) {
+    setUserKey(userInfo)
   }
 }
 

@@ -33,8 +33,8 @@ const { onAuthRequired, onResponseRefreshToken } = createServerTokenAuthenticati
       }
     },
   },
-  login(response) {
-    setToken(response.data as LoginResponse)
+  login({ data }) {
+    setToken(data.data as LoginResponse)
   },
   assignToken: method => {
     const token = getToken()

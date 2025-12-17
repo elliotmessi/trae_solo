@@ -66,6 +66,7 @@ type LoginRequest = {
 type LoginResponse = {
   access_token: string
   refresh_token: string
+  userInfo: UserInfo
   user_id: number
   username?: string
 }
@@ -87,22 +88,12 @@ type RegisterForm = RegisterRequest & {
 type UserId = number
 
 type UserInfo = {
-  userId: UserId
+  id: UserId
   username: string
-  name?: string
   nickname?: string
-  phone?: string
-  email?: string
   avatar?: string
-  // wxOpenId?: string
-  addressCity?: string
-  addressCountry?: string
-  addressPostalCode?: string
-  addressProvince?: string
-  addressStreet?: string
-  companyId?: string
-  gender?: string
-  wechatBound?: boolean
+  roles: string[]
+  permissions: string[]
 }
 
 // 用户信息更新请求类型

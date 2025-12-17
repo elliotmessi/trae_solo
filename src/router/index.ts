@@ -19,7 +19,8 @@ import {
   formatFlatteningRoutes,
 } from './utils'
 import { type Router, type RouteRecordRaw, type RouteComponent, createRouter } from 'vue-router'
-import { type DataInfo, userKey, removeToken, multipleTabsKey } from '@/utils/auth_old'
+import { userKey, removeToken, multipleTabsKey } from '@/utils/auth'
+import { local, session } from '@/utils/storage'
 
 /** 自动导入全部静态路由，无需再手动引入！匹配 src/router/modules 目录（任何嵌套级别）中具有 .ts 扩展名的所有文件，除了 remaining.ts 文件
  * 如何匹配所有文件请看：https://github.com/mrmlnc/fast-glob#basic-syntax
@@ -103,6 +104,7 @@ const whiteList = ['/login']
 const { VITE_HIDE_HOME } = import.meta.env
 
 router.beforeEach((to: ToRouteType, _from, next) => {
+  console.log('to:', to, _from)
   to.meta.loaded = loadedPaths.has(to.path)
 
   if (!to.meta.loaded) {
@@ -116,7 +118,7 @@ router.beforeEach((to: ToRouteType, _from, next) => {
       handleAliveRoute(to)
     }
   }
-  const userInfo = storageLocal().getItem<DataInfo<number>>(userKey)
+  const userInfo = local.get<UserInfo>(userKey)
   const externalLink = isUrl(to?.name as string)
   if (!externalLink) {
     to.matched.some(item => {
@@ -128,9 +130,10 @@ router.beforeEach((to: ToRouteType, _from, next) => {
   }
   /** 如果已经登录并存在登录信息后不能跳转到路由白名单，而是继续保持在当前页面 */
   function toCorrectRoute() {
+    console.log('to.fullPath:', to.fullPath)
     whiteList.includes(to.fullPath) ? next(_from.fullPath) : next()
   }
-  if (Cookies.get(multipleTabsKey) && userInfo) {
+  if (session.get(multipleTabsKey) && userInfo) {
     // 无权限跳转403页面
     if (to.meta?.roles && !isOneOfArray(to.meta?.roles, userInfo?.roles)) {
       next({ path: '/error/403' })
@@ -139,6 +142,7 @@ router.beforeEach((to: ToRouteType, _from, next) => {
     if (VITE_HIDE_HOME === 'true' && to.fullPath === '/welcome') {
       next({ path: '/error/404' })
     }
+    console.log('_from:', _from)
     if (_from?.name) {
       // name为超链接
       if (externalLink) {

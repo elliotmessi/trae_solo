@@ -1,27 +1,32 @@
 import { defineStore } from 'pinia'
 import { type userType, store, router, resetRouter, routerArrays, storageLocal } from '../utils'
-import { type UserResult, type RefreshTokenResult, getLogin, refreshTokenApi } from '@/api/user'
 import { useMultiTagsStoreHook } from './multiTags'
-import { type DataInfo, setToken, removeToken, userKey } from '@/utils/auth_old'
+import { setToken, removeToken, userKey } from '@/utils/auth'
+import { login, refreshToken } from '@/api/login'
 
 export const useUserStore = defineStore('pure-user', {
   state: (): userType => ({
+    id: storageLocal().getItem<UserInfo>(userKey)?.id ?? 0,
     // 头像
-    avatar: storageLocal().getItem<DataInfo<number>>(userKey)?.avatar ?? '',
+    avatar: storageLocal().getItem<UserInfo>(userKey)?.avatar ?? '',
     // 用户名
-    username: storageLocal().getItem<DataInfo<number>>(userKey)?.username ?? '',
+    username: storageLocal().getItem<UserInfo>(userKey)?.username ?? '',
     // 昵称
-    nickname: storageLocal().getItem<DataInfo<number>>(userKey)?.nickname ?? '',
+    nickname: storageLocal().getItem<UserInfo>(userKey)?.nickname ?? '',
     // 页面级别权限
-    roles: storageLocal().getItem<DataInfo<number>>(userKey)?.roles ?? [],
+    roles: storageLocal().getItem<UserInfo>(userKey)?.roles ?? [],
     // 按钮级别权限
-    permissions: storageLocal().getItem<DataInfo<number>>(userKey)?.permissions ?? [],
+    permissions: storageLocal().getItem<UserInfo>(userKey)?.permissions ?? [],
     // 是否勾选了登录页的免登录
     isRemembered: false,
     // 登录页的免登录存储几天，默认7天
     loginDay: 7,
   }),
   actions: {
+    /** 存储ID */
+    SET_ID(id: number) {
+      this.id = id
+    },
     /** 存储头像 */
     SET_AVATAR(avatar: string) {
       this.avatar = avatar
@@ -51,17 +56,28 @@ export const useUserStore = defineStore('pure-user', {
       this.loginDay = Number(value)
     },
     /** 登入 */
-    async loginByUsername(data) {
-      return new Promise<UserResult>((resolve, reject) => {
-        getLogin(data)
+    async loginByUsername(data: LoginRequest) {
+      return new Promise<LoginResponse>((resolve, reject) => {
+        login(data)
           .then(data => {
-            if (data?.success) setToken(data.data)
+            if (data) {
+              // setToken(data)
+              this.setUserInfo(data.userInfo)
+            }
             resolve(data)
           })
           .catch(error => {
             reject(error)
           })
       })
+    },
+    setUserInfo(userInfo: UserInfo) {
+      this.SET_ID(userInfo.id)
+      this.SET_AVATAR(userInfo.avatar ?? '')
+      this.SET_USERNAME(userInfo.username)
+      this.SET_NICKNAME(userInfo.nickname ?? '')
+      this.SET_ROLES(userInfo.roles)
+      this.SET_PERMS(userInfo.permissions)
     },
     /** 前端登出（不调用接口） */
     logOut() {
@@ -75,11 +91,12 @@ export const useUserStore = defineStore('pure-user', {
     },
     /** 刷新`token` */
     async handRefreshToken(data) {
-      return new Promise<RefreshTokenResult>((resolve, reject) => {
-        refreshTokenApi(data)
+      return new Promise<LoginResponse>((resolve, reject) => {
+        refreshToken(data)
           .then(data => {
             if (data) {
-              setToken(data.data)
+              setToken(data)
+              this.setUserInfo(data.userInfo)
               resolve(data)
             }
           })

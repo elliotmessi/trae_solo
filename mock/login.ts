@@ -8,14 +8,15 @@ export default defineFakeRoute([
     method: 'post',
     response: () =>
       success({
-        token: 'fake-token',
+        access_token: 'fake-token',
+        refresh_token: 'fake-refresh-token',
         userInfo: {
           id: '1',
           username: 'admin',
-          nickName: 'admin',
+          nickname: 'admin',
           avatar: 'https://i.gtimg.cn/club/item/face/img/2/15922_100.gif',
           roles: ['admin', 'common'],
-          auths: ['permission:btn:add', 'permission:btn:edit', 'permission:btn:delete'],
+          permissions: ['permission:btn:add', 'permission:btn:edit', 'permission:btn:delete'],
         },
         expires: 7 * 24 * 60 * 60 * 1000,
       }),
